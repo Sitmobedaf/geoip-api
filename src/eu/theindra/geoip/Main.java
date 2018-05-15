@@ -46,10 +46,14 @@ public class Main extends JavaPlugin{
 	}
 	
 	public void downloadFrom(String url) throws IOException{
+		File base = new File(getDataFolder(), "GeoLiteCity.dat");
+		if (base.exists() || System.currentTimeMillis() - base.lastModified() > 86400){
+			return;
+		}
 		URL CityURL = new URL ("http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz");
 		
 		URLConnection connection = CityURL.openConnection();
-	    connection.setConnectTimeout(10000);
+	    connection.setConnectTimeout(5000);
 	    connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Minecraft server) Bukkit");
 	    connection.connect();
 	    InputStream input = connection.getInputStream();
