@@ -35,9 +35,7 @@ public class Main extends JavaPlugin {
 			try {
 				downloadFrom("http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz");
 			} catch (IOException e) {
-				Bukkit.getConsoleSender().sendMessage("Something went wrong when downloading the geoip database.");
-				e.printStackTrace();
-				Bukkit.getPluginManager().disablePlugin(this);
+				Bukkit.getConsoleSender().sendMessage("An error occurred while trying to load the database: " + e.getMessage());
 			}
 		} else {
 			Bukkit.getLogger().info("The database was not updated, since the last update was made less than a day ago.");
